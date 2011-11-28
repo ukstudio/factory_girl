@@ -13,7 +13,8 @@ module FactoryGirl
     end
 
     def find(name)
-      @items[name.to_sym] or raise ArgumentError.new("#{@name} not registered: #{name.to_s}")
+      name_ = name.is_a?(Symbol) ? name : name.to_s.underscore.to_sym
+      @items[name_] or raise ArgumentError.new("#{@name} not registered: #{name.to_s}")
     end
 
     def each(&block)
